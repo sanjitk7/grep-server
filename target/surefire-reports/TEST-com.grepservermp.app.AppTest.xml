@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.grepservermp.app.AppTest" time="0.011" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.grepservermp.app.AppTest" time="0.012" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/surefire/surefirebooter7148387626392429154.jar /Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/surefire 2022-09-05T23-04-00_321-jvmRun1 surefire7253745196810744862tmp surefire_06745985856013535821tmp"/>
+    <property name="sun.java.command" value="/Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/surefire/surefirebooter15665249514888189778.jar /Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/surefire 2022-09-05T23-50-40_863-jvmRun1 surefire1259538061627882396tmp surefire_08856520311113234446tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/test-classes:/Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/classes:/Users/sanjitkumar/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/sanjitkumar/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
@@ -28,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/surefire/surefirebooter7148387626392429154.jar"/>
+    <property name="surefire.real.class.path" value="/Users/sanjitkumar/personal_projects/CollegeIllinois/DistributedSystems/grepDistributedServer/grepservermp/target/surefire/surefirebooter15665249514888189778.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="17.0.4.1+1-LTS-2"/>

@@ -4,10 +4,17 @@ import java.net.*;
 import java.io.*;
 
 public class App {
+
     public static void main(String[] args) {
+
+        String hostname = "localhost";
+        int port = Integer.parseInt(args[0]);
+
+        String serverid = hostname + "::" + port;
+
         try {
 
-            ServerSocket ss = new ServerSocket(3000);
+            ServerSocket ss = new ServerSocket(port);
             boolean flag = true;
 
             while (flag) {
@@ -19,7 +26,7 @@ public class App {
                     
                     System.out.println("Received grepCommand on server side: " + grepCommand);
 
-                    String grepCommandResult = "This is grep command result for the input - "+grepCommand;
+                    String grepCommandResult = serverid + ": 'this is grep command result' for the input - "+grepCommand;
                     DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                     dos.writeUTF(grepCommandResult);
                     dos.flush();
