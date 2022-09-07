@@ -25,6 +25,11 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.unix4j</groupId>
+      <artifactId>unix4j-command</artifactId>
+      <version>0.6</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -69,6 +74,20 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <!-- <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <executions>
+            <execution>
+              <phase>install</phase>
+              <goals>
+                <goal>copy-dependencies</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>/target</outputDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin> -->
       </plugins>
     </pluginManagement>
   </build>
