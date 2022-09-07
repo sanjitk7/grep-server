@@ -34,13 +34,11 @@ public class App {
                     System.out.println("grep result received from GrepCore module");
 
 
-                    // String grepCommandResult = serverId + ": 'this is grep command result' for the input - "+grepCommand;
                     // Send Data as byte array
                     DataOutputStream dos = new DataOutputStream(s.getOutputStream());
                     byte[] grepCommandResultBytes=grepCommandResult.getBytes("UTF-8");
                     dos.writeInt(grepCommandResultBytes.length);
                     dos.write(grepCommandResultBytes);
-                    // dos.writeBytes(grepCommandResult);
                     dos.flush();
 
                     if (grepCommand.equals("exit")){
