@@ -2,6 +2,7 @@ package com.grepservermp.app;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -9,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Test;
+import org.unix4j.Unix4j;
 import org.unix4j.unix.Grep;
 import org.unix4j.unix.grep.GrepOptionSet_Fcilnvx;
 
@@ -28,9 +30,9 @@ public class GrepCoreTest {
 
         GrepOptionSet_Fcilnvx expectedOptions = Grep.Options.c.F.x;
 
-        assertEquals(grepCore.getGrepFileName(), logFilePath);
-        assertEquals(grepCore.getGrepPattern(), "GET");
-        assertEquals(grepCore.getGrepOptions(), expectedOptions);
+        assertEquals(logFilePath, grepCore.getGrepFileName());
+        assertEquals("GET", grepCore.getGrepPattern());
+        assertEquals(expectedOptions, grepCore.getGrepOptions());
     }
 
     /**
@@ -42,7 +44,7 @@ public class GrepCoreTest {
         String cmd = "grep -c GET " + logFilePath;
         GrepCore grepCore = new GrepCore(cmd);
         grepCore.doGrep();
-        assertEquals(grepCore.getGrepResult(), "5");
+        assertEquals("5", grepCore.getGrepResult());
     }
 
     /**
@@ -54,7 +56,7 @@ public class GrepCoreTest {
         String cmd = "grep -l GET " + logFilePath;
         GrepCore grepCore = new GrepCore(cmd);
         grepCore.doGrep();
-        assertEquals(grepCore.getGrepResult(), "./" + logFilePath);
+        assertEquals("./" + logFilePath, grepCore.getGrepResult());
     }
 
     /**
@@ -69,9 +71,9 @@ public class GrepCoreTest {
         try {
             Path path = Paths.get(folderPath + "expected_output_F.txt");
             String expectedOutput = Files.readString(path, StandardCharsets.US_ASCII);
-            assertEquals(grepCore.getGrepResult(), expectedOutput);
+            assertEquals(expectedOutput, grepCore.getGrepResult());
         } catch (IOException e) {
-            System.out.print("IOException");
+            System.out.println("IOException");
         }
     }
 
@@ -87,9 +89,9 @@ public class GrepCoreTest {
         try {
             Path path = Paths.get(folderPath + "expected_output_V.txt");
             String expectedOutput = Files.readString(path, StandardCharsets.US_ASCII);
-            assertEquals(grepCore.getGrepResult(), expectedOutput);
+            assertEquals(expectedOutput, grepCore.getGrepResult());
         } catch (IOException e) {
-            System.out.print("IOException");
+            System.out.println("IOException");
         }
     }
 
@@ -105,9 +107,50 @@ public class GrepCoreTest {
         try {
             Path path = Paths.get(folderPath + "expected_output_n.txt");
             String expectedOutput = Files.readString(path, StandardCharsets.US_ASCII);
-            assertEquals(grepCore.getGrepResult(), expectedOutput);
+            assertEquals(expectedOutput, grepCore.getGrepResult());
         } catch (IOException e) {
-            System.out.print("IOException");
+            System.out.println("IOException");
+        }
+    }
+
+    /**
+     * TC #7: Verify the grep command output for -i flag (i.e. ignore case)
+     */
+
+    @Test
+    public void testGrepOutputI() {
+        String cmd = "grep -i firefox " + logFilePath;
+        GrepCore grepCore = new GrepCore(cmd);
+        grepCore.doGrep();
+        try {
+            Path path = Paths.get(folderPath + "expected_output_i.txt");
+            String expectedOutput = Files.readString(path, StandardCharsets.US_ASCII);
+            assertEquals(expectedOutput, grepCore.getGrepResult());
+        } catch (IOException e) {
+            System.out.println("IOException");
+        }
+    }
+
+    /**
+     * TC #8: Verify the grep command output with regex
+     */
+
+    @Test
+    public void testGrepOutputRegex() {
+        String cmd = "grep \".*181.*\" " + logFilePath;
+
+        GrepCore grepCore = new GrepCore(cmd);
+        grepCore.doGrep();
+        try {
+            Path path = Paths.get(folderPath + "expected_output_regex.txt");
+            String expectedOutput = Files.readString(path, StandardCharsets.US_ASCII);
+
+            // Unix4j.grep("n[oe]t", file).toStdOut();
+            // Unix4j.grep(".*181.*", file).toStdOut();
+
+            assertEquals(expectedOutput, grepCore.getGrepResult());
+        } catch (IOException e) {
+            System.out.println("IOException");
         }
     }
 }

@@ -14,7 +14,7 @@ public class GrepCore {
     private String grepResult = new String();
     private String grepPattern = new String();
     private String grepFileName = new String(); // TO-DO: extend support for multiple files, for now we are assuming there will only be a single file
-    
+
     private HashSet<String> grepFlags = new HashSet<String>();
 
     public GrepCore(String grepCommand) {
@@ -61,6 +61,7 @@ public class GrepCore {
                     options = Grep.Options.F;
                 }
                 options = options.F;
+                // this.isPatternRegex = false;
                 break;
             case "n":
                 if (options == null) {
@@ -107,7 +108,7 @@ public class GrepCore {
         } else {
             textResult = Unix4j.grep(grepPattern, file).toStringResult();
         }
-        // System.out.println(textResult);
+
         return textResult;
     }
 
@@ -126,8 +127,9 @@ public class GrepCore {
                     this.grepFlags.add(Character.toString(cmdArr[i].charAt(j)));
                 }
             } else {
-                if (cmdArr[i-1].startsWith("-")) {
+                if (cmdArr[i-1].startsWith("-") || i == 1) {
                     this.grepPattern = cmdArr[i]; // This is the PATTERNS field
+                    this.grepPattern  = this.grepPattern .replaceAll("\"", "");
                 } else {
                     this.grepFileName = cmdArr[i]; // This is the file name field
                 }
