@@ -34,7 +34,7 @@ public class GrepCoreTest {
     }
 
     /**
-     * TC #2: Verify the grep command output for -c flag
+     * TC #2: Verify the grep command output for -c flag (i.e. match count)
      */
 
     @Test
@@ -46,7 +46,7 @@ public class GrepCoreTest {
     }
 
     /**
-     * TC #3: Verify the grep command output for -L flag
+     * TC #3: Verify the grep command output for -L flag (i.e. file name)
      */
 
     @Test
@@ -86,6 +86,24 @@ public class GrepCoreTest {
         grepCore.doGrep();
         try {
             Path path = Paths.get(folderPath + "expected_output_V.txt");
+            String expectedOutput = Files.readString(path, StandardCharsets.US_ASCII);
+            assertEquals(grepCore.getGrepResult(), expectedOutput);
+        } catch (IOException e) {
+            System.out.print("IOException");
+        }
+    }
+
+    /**
+     * TC #6: Verify the grep command output for -n flag (i.e. line number)
+     */
+
+    @Test
+    public void testGrepOutputN() {
+        String cmd = "grep -n GET " + logFilePath;
+        GrepCore grepCore = new GrepCore(cmd);
+        grepCore.doGrep();
+        try {
+            Path path = Paths.get(folderPath + "expected_output_n.txt");
             String expectedOutput = Files.readString(path, StandardCharsets.US_ASCII);
             assertEquals(grepCore.getGrepResult(), expectedOutput);
         } catch (IOException e) {
