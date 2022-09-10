@@ -2,7 +2,6 @@ package com.grepservermp.app;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,7 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Test;
-import org.unix4j.Unix4j;
 import org.unix4j.unix.Grep;
 import org.unix4j.unix.grep.GrepOptionSet_Fcilnvx;
 
@@ -152,5 +150,23 @@ public class GrepCoreTest {
         } catch (IOException e) {
             System.out.println("IOException");
         }
+    }
+
+
+    /**
+     * TC #9: Verify different command line arguments combinations
+     */
+
+    @Test
+    public void testGrepOutputMultiargs() {
+        String cmd = "grep -vc \".*181.*\" src/test/java/com/grepservermp/app/output/sample.txt";
+        GrepCore grepCore = new GrepCore(cmd);
+        grepCore.doGrep();
+        assertEquals("9", grepCore.getGrepResult());
+
+        String cmd2 = "grep -v -c \".*181.*\" src/test/java/com/grepservermp/app/output/sample.txt";
+        GrepCore grepCore2 = new GrepCore(cmd2);
+        grepCore2.doGrep();
+        assertEquals("9", grepCore2.getGrepResult());
     }
 }
