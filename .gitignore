@@ -1,5 +1,7 @@
 logs
 res
-target
 .DS_Store
 .vscode
+target/*
+!target/*.jar
+!target/dependency/

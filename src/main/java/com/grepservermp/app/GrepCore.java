@@ -2,7 +2,6 @@ package com.grepservermp.app;
 
 import java.io.File;
 import java.util.HashSet;
-import java.util.Scanner; 
 
 import org.unix4j.Unix4j;
 import org.unix4j.unix.Grep;
@@ -17,6 +16,26 @@ public class GrepCore {
     private String grepFileName = new String(); // TO-DO: extend support for multiple files, for now we are assuming there will only be a single file
     
     private HashSet<String> grepFlags = new HashSet<String>();
+
+    public GrepCore(String grepCommand) {
+        this.cmd = grepCommand;
+    }
+
+    public String getGrepResult() {
+        return this.grepResult;
+    }
+
+    public String getGrepPattern() {
+        return this.grepPattern;
+    }
+
+    public String getGrepFileName() {
+        return this.grepFileName;
+    }
+
+    public GrepOptionSet_Fcilnvx getGrepOptions() {
+        return this.options;
+    }
 
     /**
      * Function sets the appropriate grep flag options
@@ -97,48 +116,44 @@ public class GrepCore {
      * Parses the grep command provided by the user as input and stores flags, pattern string and file name
      * @param grepCore GrepCore object
      */
-    private void parseGrepCommand(GrepCore grepCore) {
-        String[] cmdArr = grepCore.cmd.split(" "); // grep command format is `grep <flags> <pattern> <files>`
+    private void parseGrepCommand() {
+        String[] cmdArr = this.cmd.split(" "); // grep command format is `grep <flags> <pattern> <files>`
 
         for (int i = 1; i < cmdArr.length; i++) { // Ignore first index
             if (cmdArr[i].startsWith("-")) {
                 // May either be in the format `grep -ivFnclx <...>` or `grep -i -v -F -n -c -l -x <...>`
                 for (int j = 1; j < cmdArr[i].length(); j++) {
-                    grepCore.grepFlags.add(Character.toString(cmdArr[i].charAt(j)));
+                    this.grepFlags.add(Character.toString(cmdArr[i].charAt(j)));
                 }
             } else {
                 if (cmdArr[i-1].startsWith("-")) {
-                    grepCore.grepPattern = cmdArr[i]; // This is the PATTERNS field
+                    this.grepPattern = cmdArr[i]; // This is the PATTERNS field
                 } else {
-                    grepCore.grepFileName = cmdArr[i]; // This is the file name field
+                    this.grepFileName = cmdArr[i]; // This is the file name field
                 }
             }
         }
 
-        for (String flag: grepCore.grepFlags) {
-            grepCore.setGrepOption(flag);
+        for (String flag: this.grepFlags) {
+            this.setGrepOption(flag);
         }
 
     }
 
-    public String doGrep(String grepCommand) {
-
-        GrepCore grepCore = new GrepCore();
-
-        System.out.println("Enter the grep command here:");
-
-        // Accept the target grep command from the user as input from CLI
-        grepCore.cmd = grepCommand;
-        
-        grepCore.parseGrepCommand(grepCore);
+    /**
+     * Function executes grep command and returns the result back to the user
+     * @return grep result string
+     */
+    public String doGrep() {
+        this.parseGrepCommand();
         
         // Debug prints
-        System.out.println(grepCore.grepFlags);
-        System.out.println(grepCore.grepPattern);
-        System.out.println(grepCore.grepFileName);
+        System.out.println(this.grepFlags);
+        System.out.println(this.grepPattern);
+        System.out.println(this.grepFileName);
 
-        grepCore.grepResult = grepCore.executeGrep();
-        return grepCore.grepResult;
+        this.grepResult = this.executeGrep();
+        return this.grepResult;
 
     }
 }

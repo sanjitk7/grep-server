@@ -28,8 +28,8 @@ public class App {
                     System.out.println("Received grepCommand on server side: " + grepCommand);
                     System.out.println("grep command passed to GrepCore module");
 
-                    GrepCore grepCore = new GrepCore();
-                    String grepCommandResult = grepCore.doGrep(grepCommand);
+                    GrepCore grepCore = new GrepCore(grepCommand);
+                    String grepCommandResult = grepCore.doGrep();
 
                     System.out.println("grep result received from GrepCore module");
 
